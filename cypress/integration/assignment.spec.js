@@ -58,6 +58,19 @@ describe('Digital Tolk Tests', () => {
         cy.get('input[name=file]').attachFile('sample.pdf') // this file is located in fixtures
         cy.get('.normal-booking-form__book-button').should('be.visible').click()
         cy.contains('Login').should('be.visible').click()
+    })
+
+    it('TS-07 Confirmation Window Test', () => {
         cy.contains('Confirmation').should('be.visible')
+        cy.get('input[placeholder="Input Booker Name"]').should('be.visible').click().type('Test Booker').type('{enter}')
+        cy.get('input[placeholder="Input Staff Name"]').should('be.visible').click().type('Test Staff').type('{enter}')
+        cy.get('.booking-confirm-form__reference').should('be.visible').click().type('Test Reference').type('{enter}')
+        cy.get('textarea[rows]').should('be.visible').click().type('Test Notes').type('{enter}')
+        cy.get('.booking-confirm-form__question-fields > div > div > div > label:nth-child(1)').eq(0).click()
+        cy.get('.booking-confirm-form__question-fields > div > div > div > label:nth-child(1)').eq(1).click()
+        cy.contains('Change').should('be.visible').click()
+        cy.get('#google_address_autocomplete').should('be.visible').click().clear().type('Centralplan 15, 111 20 ', {delay: 500}).type('{downarrow}').type('{enter}')
+        cy.get('.booking-confirm-form__instructions').should('be.visible').type('this is a test input for address instructions')
+        cy.contains('Create Booking').should('be.visible').click()
     })
 })
