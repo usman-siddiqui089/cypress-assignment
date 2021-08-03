@@ -1,0 +1,24 @@
+{
+  "name": "cypress-assignment",
+  "version": "1.0.0",
+  "description": "This is for Cypress Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usman-siddiqui089/cypress-assignment.git"
+  },
+  "author": "Usman Siddiqui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/usman-siddiqui089/cypress-assignment/issues"
+  },
+  "homepage": "https://github.com/usman-siddiqui089/cypress-assignment#readme",
+  "devDependencies": {
+    "cypress": "^8.0.0",
+    "cypress-file-upload": "^5.0.8"
+  }
+}
