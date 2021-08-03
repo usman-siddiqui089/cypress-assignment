@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
+import dateTimeObj from './helpers/booking.helper'
 
 describe('Digital Tolk Tests', () => {
+
     it('TS-01 Navigate to Home Page', () => {
         cy.visit('https://ct.digitaltolk.se/')
         cy.contains('Logga in', {timeout: 10000}).eq(0).should('be.visible')
@@ -34,5 +36,28 @@ describe('Digital Tolk Tests', () => {
         cy.get('.login-form__login-button').should('be.visible').click()
         cy.get('div[role="alert"]', {timeout: 10000}).should('not.be.visible')
         cy.url().should('not.contain', '/login')
+    })
+
+    it('TS-06 Navigate to Booking Tab', () => {
+        cy.get('input[placeholder="Select Language"]', {timeout: 10000})
+            .should('be.visible').click().type('Ludh', {delay: 500}).type('{enter}')
+        cy.get('input[placeholder="Day"]', {timeout: 10000})
+            .should('be.visible').click()
+        cy.get(`span[aria-label="${dateTimeObj.day}"]`)
+            .should('be.visible').click()
+        cy.get('input[placeholder="Start Time"]')
+            .should('be.visible').click().type(dateTimeObj.startTime).type('{enter}')
+        cy.contains('Physical').should('be.visible').click()
+        cy.contains('Others').should('be.visible').click()
+        cy.get('div[aria-live=polite] > div > div:nth-child(1)')
+            .should('be.visible').click()
+        cy.contains('Female Translator').should('be.visible').click()
+        cy.get('div[aria-live=polite] > div > div:nth-child(2)')
+            .should('be.visible').type('usman',{delay: 500})
+        cy.contains('Usman Test Translator - 80899').should('be.visible').click()
+        cy.get('input[name=file]').attachFile('sample.pdf') // this file is located in fixtures
+        cy.get('.normal-booking-form__book-button').should('be.visible').click()
+        cy.contains('Login').should('be.visible').click()
+        cy.contains('Confirmation').should('be.visible')
     })
 })
